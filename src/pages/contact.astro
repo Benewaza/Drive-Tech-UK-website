@@ -1,0 +1,47 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ContactForm from "../components/ContactForm.astro";
+---
+
+<Layout
+  title="Contact us | Drive Tech UK Ltd - Pattern Imprinted Concrete Driveways & Landscaping Specialists | West Midlands"
+>
+  <section class="bg-blue-50">
+    <div class="xl:container mx-auto py-10 md:py-36 px-4">
+      <div
+        class="grid grid-cols-1 md:grid-cols-2 gap-y-10 md:gap-y-20 gap-x-12 xl:gap-x-24"
+      >
+        <div>
+          <h2
+            class="text-sm text-black uppercase font-semibold tracking-widest mb-3"
+          >
+            Get in touch now
+          </h2>
+          <h1 class="text-4xl xl:text-7xl text-black mb-10 font-bold">
+            Contact
+          </h1>
+          <p>
+            Get in touch with us today for all your driveway needs! Whether
+            you're looking to install a brand-new driveway, refresh your
+            existing one, or explore durable and stylish options, we're here to
+            help.
+          </p>
+        </div>
+
+        <div>
+          <ContactForm />
+        </div>
+      </div>
+    </div>
+    <section>
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1295.0355541343945!2d-2.15975107627988!3d52.56939967546608!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48709b6a2f362c1b%3A0x5ca0dc72d61b8815!2sTettenhall%20Driveways%20Ltd!5e0!3m2!1sen!2suk!4v1726046448900!5m2!1sen!2suk"
+        width="100%"
+        style="border:0;"
+        class="h-56 lg:h-96"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </section>
+  </section>
+</Layout>

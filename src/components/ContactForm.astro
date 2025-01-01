@@ -1,0 +1,79 @@
+<form id="my-form" action="https://formspree.io/f/movvnaqe" method="POST">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-2 mb-4">
+    <div>
+      <label class="block text-gray-700" for="name">Name</label>
+      <input
+        type="text"
+        id="name"
+        class="mt-1 block w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-150"
+        placeholder="Your Name"
+        required
+      />
+    </div>
+    <div>
+      <label class="block text-gray-700" for="email">Email Address</label>
+      <input
+        type="email"
+        name="email"
+        id="email"
+        class="mt-1 block w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-150"
+        placeholder="Your Email"
+        required
+      />
+    </div>
+  </div>
+  <div class="mb-4">
+    <label class="block text-gray-700" for="message">Message</label>
+    <textarea
+      id="form-message"
+      name="message"
+      rows="4"
+      class="mt-1 block w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-150"
+      placeholder="Your Message"
+      required></textarea>
+  </div>
+  <button
+    type="submit"
+    class="cta block font-bold w-full text-base py-3 px-10 bg-red-500 hover:bg-red-700 text-white transition duration-150"
+  >
+    Send Message
+  </button>
+</form>
+<div id="form-status" class="mt-4 font-semibold text-red-500"></div>
+
+<script>
+  var form = document.getElementById("my-form");
+  async function handleSubmit(event) {
+    event.preventDefault();
+    var status = document.getElementById("form-status");
+    var data = new FormData(event.target);
+    fetch(event.target.action, {
+      method: form.method,
+      body: data,
+      headers: { Accept: "application/json" },
+    })
+      .then((response) => {
+        if (response.ok) {
+          status.innerHTML =
+            "Thanks for your message, someone will be in touch soon!";
+          status.classList.add("!text-green-500");
+          form.reset();
+        } else {
+          response.json().then((data) => {
+            if (Object.hasOwn(data, "errors")) {
+              status.innerHTML = data["errors"]
+                .map((error) => error["message"])
+                .join(", ");
+            } else {
+              status.innerHTML =
+                "Oops! There was a problem submitting your form";
+            }
+          });
+        }
+      })
+      .catch((error) => {
+        status.innerHTML = "Oops! There was a problem submitting your form";
+      });
+  }
+  form.addEventListener("submit", handleSubmit);
+</script>

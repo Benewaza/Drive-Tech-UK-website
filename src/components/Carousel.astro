@@ -1,0 +1,100 @@
+---
+import { Image } from 'astro:assets';
+import arrow from '../images/arrow.svg';
+import 'swiper/css';
+import 'swiper/css/navigation';
+
+import 'glightbox/dist/css/glightbox.min.css';
+const images = await Astro.glob("/src/images/work/*").then(files => {
+  return files.map(file => file.default);
+});
+---
+
+<div class="2xl:container mx-auto py-5">
+  <div class="relative h-16 flex justify-end">
+    <!-- Add Navigation -->
+    <div class="swiper-button-prev mx-3"><img class="rotate-90" src={arrow.src} alt="arrow"></div>
+  
+    <div class="swiper-button-next mx-3"><img class="-rotate-90" src={arrow.src} alt="arrow"></div>
+  </div>
+</div>
+
+<div class="swiper mySwiper w-100">
+    <div class="swiper-wrapper">
+        {
+            images.map((image, index) => (
+            <div class="swiper-slide text-center text-sm bg-white flex justify-center align-middle">
+                    <a href={image.src} class="glightbox">
+                      <Image src={image} alt=`Work example ${index+1}` />
+                 </a>
+            </div>
+            ))
+        }
+    </div>
+  </div>
+<script>
+
+import Swiper from "swiper";
+import GLightbox from 'glightbox';
+import { Navigation } from 'swiper/modules';
+
+const lightbox = GLightbox({
+  selector: '.glightbox',
+});
+
+const swiper = new Swiper('.mySwiper', {
+    slidesPerView: 4,
+    spaceBetween: 30,
+    loop: true,
+    modules: [Navigation],
+    pagination: {
+    el: '.swiper-pagination',
+    clickable: true,
+  },
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+  breakpoints: {
+    // when window width is >= 320px
+    320: {
+      slidesPerView: 1,
+      spaceBetween: 20
+    },
+    // when window width is >= 480px
+    480: {
+      slidesPerView: 2,
+      spaceBetween: 30
+    },
+    // when window width is >= 640px
+    640: {
+      slidesPerView: 3,
+    },
+    1280: {
+      slidesPerView: 4,
+    }}
+});
+
+</script>
+
+<style>
+  /* .swiper{
+    height: 400px;
+  } */
+    .swiper-slide img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .swiper-button-next, .swiper-button-prev{
+      left: initial;
+      right: initial;
+      position: relative;
+    }
+
+    .swiper-button-prev:after, .swiper-button-next:after{
+      content: none;
+    }
+</style>
