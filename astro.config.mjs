@@ -1,8 +1,10 @@
 import { defineConfig } from 'astro/config';
 import tailwind from "@astrojs/tailwind";
 
-// https://astro.build/config
 export default defineConfig({
-  integrations: [tailwind()]
+  output: 'static',
+  integrations: [tailwind()],
+  site: "https://github.com/Benewaza/Drive-Tech-UK-website",
+  base: '/<Drive-Tech-UK-website>/', // Base path for GitHub Pages
 });
 
