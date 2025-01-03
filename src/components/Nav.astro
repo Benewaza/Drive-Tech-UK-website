@@ -5,10 +5,10 @@ const pathname = new URL(Astro.request.url).pathname;
 const currentPath = pathname.slice(1);
 ---
 
-<nav class="bg-white px-4 2xl:px-40 rounded stroke">
+<nav id="nav" class="bg-white px-4 2xl:px-40 rounded stroke">
   <div class="md:flex md:justify-between py-4">
     <div class="flex justify-between items-center">
-      <a href={`${Astro.site}/`}>
+      <a href={`/`}>
         <Image src={logo} alt="Drive Tech UK Ltd Logo" class="w-48 lg:w-64" />
       </a>
 
@@ -46,7 +46,7 @@ const currentPath = pathname.slice(1);
         <li>
           <a
             href={`${Astro.site}/`}
-            class={`block text-lg py-2 pr-4 pl-3 text-gray-700 bg-gray-50 md:bg-white hover:bg-gray-100 md:hover:bg-transparent ${currentPath === "" ? "active" : ""}`}
+            class={`block text-lg py-2 pr-4 pl-3 text-gray-700 border-b-[1px] md:border-none bg-none border-b-gray-200  md:bg-white hover:bg-gray-100 md:hover:bg-transparent ${currentPath === "" ? "active" : ""}`}
           >
             Home
           </a>
@@ -55,7 +55,7 @@ const currentPath = pathname.slice(1);
         <li>
           <a
             href={`${Astro.site}/contact`}
-            class={`cta block md:font-bold text-lg md:text-base pr-4 pl-3 py-3 md:px-10 text-gray-700 bg-gray-50 hover:bg-gray-100 md:text-white ${currentPath === "contact" ? "active md:bg-red-700 md:hover:bg-red-800 after:!w-0" : "md:bg-red-500 md:hover:bg-red-700"}`}
+            class={`cta block md:font-bold text-lg md:text-base border-b-1 border-b-sky-800 pr-4 pl-3 py-3 md:px-10 text-gray-700 hover:bg-gray-100 md:text-white ${currentPath === "contact" ? "active md:bg-red-700 md:hover:bg-red-800 after:!w-0" : "md:bg-red-500 md:hover:bg-red-700"}`}
           >
             Contact
           </a>
@@ -67,10 +67,12 @@ const currentPath = pathname.slice(1);
 <script>
   const menuToggle = document.getElementById("menu-toggle");
   const mobileMenu = document.getElementById("mobile-menu");
+  const nav = document.getElementById("nav");
 
   menuToggle.addEventListener("click", function () {
     mobileMenu.classList.toggle("max-h-0"); // Collapse height
     mobileMenu.classList.toggle("max-h-96"); // Expand height
+    nav.classList.toggle("!bg-gray-50"); // Expand height
   });
 </script>
 
